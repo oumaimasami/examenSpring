@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Vente en Ligne</title>
+
+<!-- Bootstrap core CSS -->
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="/css/index.css" rel="stylesheet">
+</head>
+
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<a class="navbar-brand" >Electromenager</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" th:href="@{/}"
+					href="#">Home </a></li>
+				
+			</ul>
+			<nav>
+				<ul class="navbar-nav text-right">
+					<li class="nav-item"><a class="nav-link" href="#" th:href="@{/cart_shopping}">Shopping
+							Cart</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/}" href="#">logout</a>
+					</li>
+
+				</ul>
+			</nav>
+		</div>
+	</nav>
+	<div class="container-fluid py-5">
+    <h1 class="h1">Shopping Cart</h1>
+    
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">Product Name</th>
+            <th scope="col">Product Image</th>
+            <th scope="col">Product Price</th>
+        </tr>
+        </thead>
+        <tbody>
+
+       <th:block th:each="item, status : ${cartItems}">
+       <tr th:with="product = ${item.product}">
+            <td th:text="${product.name}"></td>
+            <td><img src="" height="100px" width="100px"  th:src="@{${'/productImages/' + product.image}}"></td>
+            <td th:text="${product.price}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="container-fluid py-5">
+       <h2 class="h2">Total Price : <span th:text="${sum}"></span><span>&#x24;</span></h2>    
+    </div>
+</div>
+	
+	
+	
+	
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+	</script>
+	<script src="../../assets/js/vendor/popper.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

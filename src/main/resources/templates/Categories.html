@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Vente en Ligne</title>
+
+<!-- Bootstrap core CSS -->
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="/css/index.css" rel="stylesheet">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<a class="navbar-brand" href="#">Electromenager</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" th:href="@{/}"
+					href="#">Home </a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/admin/products}" href="#">Products</a>
+				</li>
+			</ul>
+			<nav>
+				<ul class="navbar-nav text-right">
+					<li class="nav-item"><a class="nav-link" th:href="@{/cart_shopping}" href="#">Shopping
+							Cart</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">ADMIN</a>
+					<li class="nav-item"><a class="nav-link" href="#" th:href="@{/}">Log Out</a>
+					</li>
+
+				</ul>
+			</nav>
+		</div>
+	</nav>
+	<div class="container">
+
+    <a th:href="@{/admin/categories/add}" style="margin: 20px 0" class="btn btn-primary">Add Category</a>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">Number</th>
+            <th scope="col">Category Name</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Update</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="category, num : ${categories}">
+            <th scope="row" th:text="${num.index + 1}">1</th>
+            <td th:text="${category.name}">Larry</td>
+
+            <td><a href="" th:href="@{/admin/categories/delete/{id}(id=${category.id})}" class="btn btn-danger">Delete</a></td>
+            <td><a href="" th:href="@{/admin/categories/update/{id}(id=${category.id})}" class="btn btn-warning">Update</a></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+	
+	
+
+
+
+
+
+
+
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+	</script>
+	<script src="../../assets/js/vendor/popper.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Vente en Ligne</title>
+
+<!-- Bootstrap core CSS -->
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="/css/index.css" rel="stylesheet">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<a class="navbar-brand" href="#">Electromenager</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" th:href="@{/}"
+					href="#">Home </a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/admin/products}" href="#">Products</a>
+				</li>
+			</ul>
+			<nav>
+				<ul class="navbar-nav text-right">
+					<li class="nav-item"><a class="nav-link" th:href="@{/cart_shopping}" href="#">Shopping
+							Cart</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">ADMIN</a>
+					<li class="nav-item"><a class="nav-link" href="#" th:href="@{/}">Log Out</a>
+					</li>
+
+				</ul>
+			</nav>
+		</div>
+	</nav>
+	<div class="container">
+    <h3>Add a new Product</h3>
+    <form th:action="@{/admin/products/add}" method="post" th:object="${productDTO}" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-sm-5">
+
+                <input type="hidden" name="id" th:field="*{id}">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" required th:field="*{name}" name="name" id="name"
+                           placeholder="Enter name">
+
+                </div>
+                <div class="form-group">
+                    <label for="category">Select Category</label>
+                    <select class="form-control" th:field="*{categoryId}" id="category" name="category">
+                        <option th:each="category :${categories}"
+                                th:value="${category.id}"
+                                th:text="${category.name}"
+                        >
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" class="form-control" required th:field="*{price}" name="price" id="price"
+                           placeholder="Price">
+                </div>
+                <div class="form-group">
+                    <label for="weight">Weight in Kilo</label>
+                    <input type="number" class="form-control" required th:field="*{weight}" name="weight" id="weight"
+                           placeholder="Weight">
+                </div>
+                <div class="form-group">
+                    <label for="description">Product Description</label>
+                    <textarea class="form-control" rows="5" th:field="*{description}" name="description" id="description"></textarea>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <p>Product Image</p>
+                <div class="custom-file">
+                    <input type="file"  class="custom-file-input" name="productImage" accept="image/jpeg, image/png"  id="productImage"/>
+                    <label class="custom-file-label" for="productImage">Choose file</label>
+                </div>
+                <div class="form-group">
+                    <img src="#" id="imgPreview" height="100px" width="100px" th:src="@{${'/productImages/' + productDTO.image}}" style="margin-top: 20px" alt=" ">
+                </div>
+                <input type="hidden" name="imgName" th:value="${productDTO.image}">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+	</script>
+	<script src="../../assets/js/vendor/popper.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script>
+    function readURL(input){
+        if(input.files && input.files[0]){
+            var reader = new FileReader();
+            reader.onload = function(e){
+                $('#imgPreview').attr('src', e.target.result).width(100).height(100);
+            }
+            reader.readAsDataURL(input.files[0])
+        }
+    }
+    $('#productImage').change(function(){
+        readURL(this);
+    });
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+
+</body>
+</html>
